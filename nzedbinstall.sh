@@ -194,7 +194,7 @@ chmod 775 /var/www/nZEDb/www/install
 chown -R www-data:www-data /var/www/
 
 clear
-echo "This installer sets the memory limit to -1"
+echo "This installer sets the memory limit to 512"
 echo "On some low memory machines this can cause lockups and dataloss"
 echo "If you have a low memory machine please edit the following files to your likeing"
 
@@ -218,12 +218,12 @@ clear
 sed -i -e 's/max_execution_time.*$/max_execution_time = 120/' /etc/php5/fpm/php.ini
 sed -i -e 's/max_execution_time.*$/max_execution_time = 120/' /etc/php5/cli/php.ini
 sed -i -e 's/max_execution_time.*$/max_execution_time = 120/' /etc/php5/apache2/php.ini
-sed -i -e 's/memory_limit.*$/memory_limit = -1/' /etc/php5/fpm/php.ini
-sed -i -e 's/memory_limit.*$/memory_limit = -1/' /etc/php5/cli/php.ini
-sed -i -e 's/memory_limit.*$/memory_limit = -1/' /etc/php5/apache2/php.ini
-sed -i -e 's/[;?]date.timezone.*$/date.timezone = America\/New_York/' /etc/php5/fpm/php.ini
-sed -i -e 's/[;?]date.timezone.*$/date.timezone = America\/New_York/' /etc/php5/cli/php.ini
-sed -i -e 's/[;?]date.timezone.*$/date.timezone = America\/New_York/' /etc/php5/apache2/php.ini
+sed -i -e 's/memory_limit.*$/memory_limit = 512/' /etc/php5/fpm/php.ini
+sed -i -e 's/memory_limit.*$/memory_limit = 512/' /etc/php5/cli/php.ini
+sed -i -e 's/memory_limit.*$/memory_limit = 512/' /etc/php5/apache2/php.ini
+sed -i -e 's/[;?]date.timezone.*$/date.timezone = America\/Chicago/' /etc/php5/fpm/php.ini
+sed -i -e 's/[;?]date.timezone.*$/date.timezone = America\/Chicago/' /etc/php5/cli/php.ini
+sed -i -e 's/[;?]date.timezone.*$/date.timezone = America\/Chicago/' /etc/php5/apache2/php.ini
 
 #touch /etc/apache2/sites-available/nZEDb
 
