@@ -136,7 +136,7 @@ fi
 
 
 clear
-echo "You can install the ffmpeg package or compile from source. To install the ffmpeg package type \"y\"."
+echo "You can install the ffmpeg package or compile from source. To install the ffmpeg package type \"y\", if your using ubuntu, you should probably hit \"n\"."
 echo "y=YES n=NO"
 read COMPILE
 
@@ -196,10 +196,21 @@ git clone https://github.com/nZEDb/nZEDb.git /var/www/nZEDb
 chmod -R 775 /var/www/nZEDb/www/lib/smarty/templates_c
 chmod -R 775 /var/www/nZEDb/www/covers
 chmod -R 775 /var/www/nZEDb/nzbfiles
+mkdir /var/www/nZEDb/nzbfiles/tmpunrar -p
+chmod -R 775 /var/www/nZEDb/nzbfiles/tmpunrar
 chmod 775 /var/www/nZEDb/www
 chmod 775 /var/www/nZEDb/www/install
 chown -R www-data:www-data /var/www/
 
+clear
+echo "Adding a line to your fstab."
+echo "This will give you a ramdisk of 128M for tmpunrar located here: /var/www/nZEDb/nzbfiles/tmpunrar"
+echo "...see the faq #7 here: http://nzedb.com/index.php?topic=41.0"
+echo "" >> /etc/fstab
+echo "#nZEDb installer added this" >> /etc/fstab
+echo "none /var/www/nZEDb/nzbfiles/tmpunrar   tmpfs  nodev,nodiratime,noexec,nosuid,size=128M 0 0" >> /etc/fstab
+
+sleep 5
 clear
 echo "This installer sets the memory limit to 512"
 echo "On some low memory machines this can cause lockups and dataloss"
