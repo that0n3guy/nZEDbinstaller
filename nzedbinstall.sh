@@ -218,9 +218,9 @@ clear
 sed -i -e 's/max_execution_time.*$/max_execution_time = 120/' /etc/php5/fpm/php.ini
 sed -i -e 's/max_execution_time.*$/max_execution_time = 120/' /etc/php5/cli/php.ini
 sed -i -e 's/max_execution_time.*$/max_execution_time = 120/' /etc/php5/apache2/php.ini
-sed -i -e 's/memory_limit.*$/memory_limit = 512/' /etc/php5/fpm/php.ini
-sed -i -e 's/memory_limit.*$/memory_limit = 512/' /etc/php5/cli/php.ini
-sed -i -e 's/memory_limit.*$/memory_limit = 512/' /etc/php5/apache2/php.ini
+sed -i -e 's/memory_limit.*$/memory_limit = 512M/' /etc/php5/fpm/php.ini
+sed -i -e 's/memory_limit.*$/memory_limit = 512M/' /etc/php5/cli/php.ini
+sed -i -e 's/memory_limit.*$/memory_limit = 512M/' /etc/php5/apache2/php.ini
 sed -i -e 's/[;?]date.timezone.*$/date.timezone = America\/Chicago/' /etc/php5/fpm/php.ini
 sed -i -e 's/[;?]date.timezone.*$/date.timezone = America\/Chicago/' /etc/php5/cli/php.ini
 sed -i -e 's/[;?]date.timezone.*$/date.timezone = America\/Chicago/' /etc/php5/apache2/php.ini
