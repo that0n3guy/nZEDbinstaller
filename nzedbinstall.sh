@@ -47,6 +47,9 @@ echo
 echo "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied"
 echo "warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
 echo "See the GNU General Public License for more details."
+echo 
+echo "This has been modified to work specifically with Ubuntu 12.04."
+
 echo
 echo
 
@@ -154,6 +157,11 @@ echo "Installing Prerequirements......"
 
 
 apt-get --quiet --quiet update
+sudo apt-get install -qq python-software-properties
+# needed for adding php 5.4 as of 8/21/2013
+add-apt-repository ppa:ondrej/php5-oldstable
+apt-get --quiet --quiet update
+
 apt-get install -qq git
 apt-get install -qq apache2
 apt-get install -qq mysql-server
@@ -167,7 +175,6 @@ apt-get install -qq php5-gd
 apt-get install -qq php5-mysqlnd
 apt-get install -qq php5-curl
 apt-get install -qq openssh-server
-apt-get install -qq python-software-properties
 apt-get install -qq software-properties-common
 apt-get install -qq ca-certificates
 apt-get install -qq ssl-cert
