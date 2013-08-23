@@ -186,6 +186,10 @@ apt-get install -qq tmux
 apt-get install -qq python-setuptools
 apt-get install -qq python-mysqldb
 apt-get install -qq python-pip
+apt-get install -qq screen
+
+python -m easy_install
+easy_install cymysql
 
 mkdir -p /var/www/nZEDb
 chmod 777 /var/www/nZEDb
@@ -201,6 +205,7 @@ chmod -R 775 /var/www/nZEDb/nzbfiles/tmpunrar
 chmod 775 /var/www/nZEDb/www
 chmod 775 /var/www/nZEDb/www/install
 chown -R www-data:www-data /var/www/
+chmod -R 777 /var/www/nZEDb/misc/update_scripts/nix_scripts/tmux/logs
 
 clear
 echo "Adding a line to your fstab."
@@ -236,14 +241,32 @@ clear
 sed -i -e 's/max_execution_time.*$/max_execution_time = 120/' /etc/php5/fpm/php.ini
 sed -i -e 's/max_execution_time.*$/max_execution_time = 120/' /etc/php5/cli/php.ini
 sed -i -e 's/max_execution_time.*$/max_execution_time = 120/' /etc/php5/apache2/php.ini
-sed -i -e 's/memory_limit.*$/memory_limit = 512M/' /etc/php5/fpm/php.ini
-sed -i -e 's/memory_limit.*$/memory_limit = 512M/' /etc/php5/cli/php.ini
-sed -i -e 's/memory_limit.*$/memory_limit = 512M/' /etc/php5/apache2/php.ini
+sed -i -e 's/memory_limit.*$/memory_limit = 1024M/' /etc/php5/fpm/php.ini
+sed -i -e 's/memory_limit.*$/memory_limit = 1024M/' /etc/php5/cli/php.ini
+sed -i -e 's/memory_limit.*$/memory_limit = 1024M/' /etc/php5/apache2/php.ini
 sed -i -e 's/[;?]date.timezone.*$/date.timezone = America\/Chicago/' /etc/php5/fpm/php.ini
 sed -i -e 's/[;?]date.timezone.*$/date.timezone = America\/Chicago/' /etc/php5/cli/php.ini
 sed -i -e 's/[;?]date.timezone.*$/date.timezone = America\/Chicago/' /etc/php5/apache2/php.ini
 
+# disable mysqlnd.so b/c it doesn't exist in 12.04... not why its enabled (causes errors)
+sed -i 's/extension=mysqlnd.so\+/; extension=mysqlnd.so/' /etc/php5/conf.d/10-mysqlnd.ini
+
+#configure screen to load .profile
+echo 'shell -$SHELL' >> ~/.screenrc
+
+echo 
+echo "What is the username of the main use you use on this system (not root)?"
+read MAINUSER
+
+#quick aliases to get to tmux scripts
+echo "" >> /home/${MAINUSER}/.profile
+echo "# From nZEDbinstaller:" >> /home/${MAINUSER}/.profile
+echo "alias nzdir='cd /var/www/nZEDb/misc/update_scripts/nix_scripts/tmux'" >> /home/${MAINUSER}/.profile
+echo "alias wwwuser='sudo su -s /bin/bash www-data'" >> /home/${MAINUSER}/.profile
+
+
 #touch /etc/apache2/sites-available/nZEDb
+
 
 if [ ! -f /etc/apache2/sites-available/nZEDb ]; then
 cat << EOF >> /etc/apache2/sites-available/nZEDb
