@@ -217,7 +217,7 @@ echo "none /var/www/nZEDb/nzbfiles/tmpunrar   tmpfs  nodev,nodiratime,noexec,nos
 
 sleep 5
 clear
-echo "This installer sets the memory limit to 512"
+echo "This installer sets the memory limit to 1024"
 echo "On some low memory machines this can cause lockups and dataloss"
 echo "If you have a low memory machine please edit the following files to your likeing"
 
